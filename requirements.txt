@@ -1,0 +1,4 @@
+slack-sdk
+fastapi
+uvicorn
+pydantic
