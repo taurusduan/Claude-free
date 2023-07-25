@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 
 class ClaudeRequest(BaseModel):
-    channel_id: str
+    channel_id: Optional[str] = None
     conversation_key: Optional[str] = None
-    message: str
+    message_key: Optional[str] = None
+    message: Optional[str] = None

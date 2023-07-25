@@ -38,6 +38,8 @@ class ClaudeSlack:
         return response["ts"]
 
     def get_reply(self, channel_id, oldest_ts, thread_ts=None) -> str:
+        if thread_ts is None or len(thread_ts) == 0:
+            thread_ts = None
         # channel_id id of a channel or id of a private conversation
         # oldest_ts is id of the message, which means to get the reply of this message, is actually to get all the messages after this message
         # thread_ts means a conversation id on a channel,if it's a private conversation, you can leave it alone
@@ -60,7 +62,7 @@ class ClaudeSlack:
     def send_message_and_get_reply_on_channel(self, channel_id, message, thread_ts=None) -> Tuple[str, str, str]:
         # channel_id id of a channel or id of a private conversation
         # thread_ts means a conversation id on a channel,if it's None means a new conversation
-        if len(thread_ts) == 0:
+        if thread_ts is None or len(thread_ts) == 0:
             thread_ts = None
         ts = self.send_message(channel_id, message, thread_ts)
         try:
