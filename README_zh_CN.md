@@ -10,6 +10,8 @@
 对于如何注册以及配置slack等参数，你可以参考这个视频：[[SLACK配置视频]](https://www.bilibili.com/video/BV1Lz4y1B7Hs/?spm_id_from=333.337.search-card.all.click&vd_source=0f2e34b3c4cefb6fccb9eb108ab54e1a)
 不过在配置权限时除了视频中的权限外，还需要配置users:read权限，这个权限是用来检测配置的claude_id是否存在，汇总:[channels:history,channels:read,channels:write,groups:history,groups:read,groups:write,chat:write, im:history, im:write, mpi,users:read]
 
+channel_id 应该应为频道id，请不要使用私聊，且请在频道中添加claude。
+
 相关的链接：
 
 token获取：https://api.slack.com/

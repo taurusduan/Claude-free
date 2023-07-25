@@ -10,6 +10,8 @@ For instructions on how to sign up and configure parameters such as slack, you c
 
 However, in addition to the permissions in the video, users:read permissions need to be configured when configuring permissions, which is used to detect whether the configured claude_id exists. Summary:[channels:history,channels:read,channels:write,groups:history,groups:read,groups:write,chat:write, im:history, im:write, mpi,users:read]
 
+channel_id should be the channel id, please do not use private chat, and please add claude to the channel.
+
 Related links:
 
 token Obtain: https://api.slack.com/
