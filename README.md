@@ -12,6 +12,8 @@ However, in addition to the permissions in the video, users:read permissions nee
 
 channel_id should be the channel id, please do not use private chat, and please add claude to the channel.
 
+WORKERS indicates the number of requests that can be processed at the same time. The value can be adjusted based on the actual situation.
+
 Related links:
 
 token Obtain: https://api.slack.com/

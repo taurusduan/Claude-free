@@ -12,6 +12,8 @@
 
 channel_id 应该应为频道id，请不要使用私聊，且请在频道中添加claude。
 
+WORKERS 参数代表同时可处理的请求个数，根据实际情况调整。
+
 相关的链接：
 
 token获取：https://api.slack.com/
