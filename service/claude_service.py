@@ -24,3 +24,16 @@ def check_channel_id(channel_id: str) -> str:
             return CHANNEL_ID
     else:
         return channel_id
+
+
+def send_message_only(data: ClaudeRequest) -> ClaudeResponse:
+    conversation_key, message_key = client.send_message_only(channel_id=data.channel_id,
+                                                             message=data.message,
+                                                             thread_ts=data.conversation_key)
+    return ClaudeResponse(conversation_key=conversation_key, message_key=message_key)
+
+
+def receive_reply_fast(data: ClaudeRequest) -> ClaudeResponse:
+    message = client.get_reply_fast(channel_id=data.channel_id, oldest_ts=data.message_key,
+                                    thread_ts=data.conversation_key)
+    return ClaudeResponse(conversation_key=data.conversation_key, message_key=data.message_key, message=message)

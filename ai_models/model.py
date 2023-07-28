@@ -76,3 +76,36 @@ class ClaudeSlack:
     def send_message_and_get_reply_on_private_conversation(self, channel_id, message) -> str:
         ts = self.send_message(channel_id, message)
         return self.get_reply(channel_id=channel_id, oldest_ts=ts)
+
+    def send_message_only(self, channel_id, message, thread_ts=None) -> Tuple[str, str]:
+        # channel_id id of a channel or id of a private conversation
+        # thread_ts means a conversation id on a channel,if it's None means a new conversation
+        if thread_ts is None or len(thread_ts) == 0:
+            thread_ts = None
+        ts = self.send_message(channel_id, message, thread_ts)
+        if thread_ts is None:  # a new conversation
+            return ts, ts
+        else:  # old conversation
+            return thread_ts, ts
+
+    def get_reply_fast(self, channel_id, oldest_ts, thread_ts=None) -> str:
+        if thread_ts is None or len(thread_ts) == 0:
+            thread_ts = None
+        # channel_id id of a channel or id of a private conversation
+        # oldest_ts is id of the message, which means to get the reply of this message, is actually to get all the messages after this message
+        # thread_ts means a conversation id on a channel,if it's a private conversation, you can leave it alone
+        try:
+            response = self.client.conversations_replies(
+                channel=channel_id,
+                oldest=oldest_ts,
+                ts=thread_ts
+            )
+            message = list(response['messages'][1]["blocks"][0]["elements"][0]["elements"])
+            if len(message) == 1 and "style" not in message[0]:
+                return message[0]["text"]
+            else:
+                return 'False'
+        except IndexError as e:
+            print(e)
+            logger.exception(e)
+            return 'False'
